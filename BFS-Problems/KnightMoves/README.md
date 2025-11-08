@@ -100,3 +100,38 @@ BFS এই সমস্যার জন্য উপযুক্ত কারণ
 - `1` → ধূসর (queue তে আছে)  
 - `2` → কালো (প্রসেস করা শেষ)
 
+## 🧮 PseudoCode
+
+```cpp
+FUNCTION bfs_knight(startR, startC, endR, endC):
+    N = 8
+    DEFINE dist[N][N], color[N][N]
+    DEFINE Queue Q
+
+    FOR r FROM 0 TO N-1:
+        FOR c FROM 0 TO N-1:
+            dist[r][c] = INFINITY
+            color[r][c] = -1
+
+    dist[startR][startC] = 0
+    color[startR][startC] = 1
+    ENQUEUE (startR, startC)
+
+    WHILE Q IS NOT EMPTY:
+        (r, c) = DEQUEUE()
+
+        IF (r, c) == (endR, endC):
+            RETURN dist[r][c]
+
+        FOR i FROM 0 TO 7:
+            newR = r + kr[i]
+            newC = c + kc[i]
+
+            IF newR,newC IS ON BOARD AND color[newR][newC] == -1:
+                color[newR][newC] = 1
+                dist[newR][newC] = dist[r][c] + 1
+                ENQUEUE(newR, newC)
+
+        color[r][c] = 2
+
+    RETURN -1
